@@ -14,16 +14,16 @@ USE sabor_da_vila;
 -- FUNCIONÁRIOS: 1 gerente, 4 garçons, 1 caixa, 3 cozinha (+1 garçom inativo)
 -- ---------------------------------------------------------------------
 INSERT INTO funcionario (funcionario_id, perfil, nome, email, senha_hash, ativo) VALUES
-(1, 'gerente',  'Célia Andrade',    'celia@sabordavila.com',    '$2b$10$6Epso9SQJ85K80kR2gzipuLv2xKpQ7yWuDdlno.q5hu2DyC9g2hKK', TRUE),
-(2, 'garcom', 'Bruno Martins',    'bruno@sabordavila.com',    '$2b$10$6Epso9SQJ85K80kR2gzipuLv2xKpQ7yWuDdlno.q5hu2DyC9g2hKK', TRUE),
-(3, 'garcom', 'Carla Souza',      'carla@sabordavila.com',    '$2b$10$6Epso9SQJ85K80kR2gzipuLv2xKpQ7yWuDdlno.q5hu2DyC9g2hKK', TRUE),
-(4, 'garcom', 'Diego Lima',       'diego@sabordavila.com',    '$2b$10$6Epso9SQJ85K80kR2gzipuLv2xKpQ7yWuDdlno.q5hu2DyC9g2hKK', TRUE),
-(5, 'garcom', 'Elisa Rocha',      'elisa@sabordavila.com',    '$2b$10$6Epso9SQJ85K80kR2gzipuLv2xKpQ7yWuDdlno.q5hu2DyC9g2hKK', TRUE),
-(6, 'caixa', 'Fátima Gomes',     'fatima@sabordavila.com',   '$2b$10$6Epso9SQJ85K80kR2gzipuLv2xKpQ7yWuDdlno.q5hu2DyC9g2hKK', TRUE),
-(7, 'cozinha', 'Gustavo Pires',    'gustavo@sabordavila.com',  '$2b$10$6Epso9SQJ85K80kR2gzipuLv2xKpQ7yWuDdlno.q5hu2DyC9g2hKK', TRUE),
-(8, 'cozinha', 'Helena Costa',     'helena@sabordavila.com',   '$2b$10$6Epso9SQJ85K80kR2gzipuLv2xKpQ7yWuDdlno.q5hu2DyC9g2hKK', TRUE),
-(9, 'cozinha', 'Igor Ferreira',    'igor@sabordavila.com',     '$2b$10$6Epso9SQJ85K80kR2gzipuLv2xKpQ7yWuDdlno.q5hu2DyC9g2hKK', TRUE),
-(10, 'garcom', 'Joana Barbosa',    'joana@sabordavila.com',    '$2b$10$6Epso9SQJ85K80kR2gzipuLv2xKpQ7yWuDdlno.q5hu2DyC9g2hKK', FALSE);
+('gerente',  'Célia Andrade',    'celia@sabordavila.com',    '$2b$10$6Epso9SQJ85K80kR2gzipuLv2xKpQ7yWuDdlno.q5hu2DyC9g2hKK', TRUE),
+('garcom', 'Bruno Martins',    'bruno@sabordavila.com',    '$2b$10$6Epso9SQJ85K80kR2gzipuLv2xKpQ7yWuDdlno.q5hu2DyC9g2hKK', TRUE),
+('garcom', 'Carla Souza',      'carla@sabordavila.com',    '$2b$10$6Epso9SQJ85K80kR2gzipuLv2xKpQ7yWuDdlno.q5hu2DyC9g2hKK', TRUE),
+('garcom', 'Diego Lima',       'diego@sabordavila.com',    '$2b$10$6Epso9SQJ85K80kR2gzipuLv2xKpQ7yWuDdlno.q5hu2DyC9g2hKK', TRUE),
+('garcom', 'Elisa Rocha',      'elisa@sabordavila.com',    '$2b$10$6Epso9SQJ85K80kR2gzipuLv2xKpQ7yWuDdlno.q5hu2DyC9g2hKK', TRUE),
+('caixa', 'Fátima Gomes',     'fatima@sabordavila.com',   '$2b$10$6Epso9SQJ85K80kR2gzipuLv2xKpQ7yWuDdlno.q5hu2DyC9g2hKK', TRUE),
+('cozinha', 'Gustavo Pires',    'gustavo@sabordavila.com',  '$2b$10$6Epso9SQJ85K80kR2gzipuLv2xKpQ7yWuDdlno.q5hu2DyC9g2hKK', TRUE),
+('cozinha', 'Helena Costa',     'helena@sabordavila.com',   '$2b$10$6Epso9SQJ85K80kR2gzipuLv2xKpQ7yWuDdlno.q5hu2DyC9g2hKK', TRUE),
+('cozinha', 'Igor Ferreira',    'igor@sabordavila.com',     '$2b$10$6Epso9SQJ85K80kR2gzipuLv2xKpQ7yWuDdlno.q5hu2DyC9g2hKK', TRUE),
+('garcom', 'Joana Barbosa',    'joana@sabordavila.com',    '$2b$10$6Epso9SQJ85K80kR2gzipuLv2xKpQ7yWuDdlno.q5hu2DyC9g2hKK', FALSE);
 
 -- ---------------------------------------------------------------------
 -- MESAS: 15 mesas
