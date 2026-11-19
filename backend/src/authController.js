@@ -1,6 +1,9 @@
 const bcrypt = require('bcrypt');
 const db = require('./database');
+const { generateToken } = require('./generateToken');
+require('./generateToken');
 require('dotenv').config();
+
 
 exports.cadastrar = async (req, res) => {
     try {
@@ -23,8 +26,42 @@ exports.cadastrar = async (req, res) => {
     }
 };
 
+exports.login = async (req, res) => {
+    try {
+        const {email, senha} = req.body;
+        if (!email || !senha) return res.status(400).json({msg: "Campos não preenchidos ou inválidos"});
+
+        const [rows] = await db.query("SELECT email, funcionario_id, senha_hash FROM funcionario WHERE email = ?", [email]);
+        if (rows.lenght === 0) return res.status(401).json({msg: "Email ou senha inválidos"});
+        const usuario = rows[0];
+
+        const id = usuario.funcionario_id;
+        const checkSenha = await bcrypt.compare(senha, usuario.senha_hash);
+
+        if (!checkSenha) return res.status(401).json({msg: "Email ou senha inválidos"});
+
+        const token = generateToken(id);
+
+        return res.status(200).json({msg: "Login efetuado com sucesso", token, id});
+
+    } catch (error) {
+        console.error(error.message)
+        return res.status(500).json({msg: "Erro interno do servidor"});        
+    }
+};
 
 
+exports.me = async (req, res) => {
+    try {
+        return res.status(200).json({
+            funcionarioId: req.funcionarioId
+        });
+    } catch (error) {
+        return res.status(500).json({
+            msg: 'Erro interno do servidor'
+        });
+    }
+};
 
 // // teste
 // this.cadastrar(
