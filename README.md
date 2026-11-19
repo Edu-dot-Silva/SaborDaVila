@@ -7,7 +7,7 @@
 
 ## Restaurante Sabor da Vila
 ```
-"Oi gente! Sou a Dona Célia do Sabor da Vila. A gente anota tudo em comanda de papel. Na sexta à noite a cozinha recebe as comandas fora de orem, o garçom esquece de lançar a sobremesa e, no fechamente, a conta da mesa não bate. Também quero saber quis pratos vendem mais, para montar o cardápio do próximo mês."
+"Oi gente! Sou a Dona Célia do Sabor da Vila. A gente anota tudo em comanda de papel. Na sexta à noite a cozinha recebe as comandas fora de ordem, o garçom esquece de lançar a sobremesa e, no fechamente, a conta da mesa não bate. Também quero saber quis pratos vendem mais, para montar o cardápio do próximo mês."
 ```
 
 ### Sobre o negócio
