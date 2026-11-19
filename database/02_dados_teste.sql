@@ -1,66 +1,59 @@
--- =====================================================================
--- Sabor da Vila - Dados de teste
--- Rodar depois do 01_criacao.sql:
---   mysql -u root -p sabor_da_vila < 02_dados_teste.sql
--- Todos os funcionários usam a senha de teste: 123456
--- (o hash abaixo é bcrypt; no back-end gere o hash com a lib bcrypt)
--- =====================================================================
 USE sabor_da_vila;
 
--- ---------------------------------------------------------------------
+-- Perfis de acesso
+INSERT INTO perfis (nome, descricao) VALUES
+('gerente', 'Acesso total, cadastros, cancelamentos e relatórios'),
+('garcom', 'Abre comandas e lança itens nas próprias comandas'),
+('cozinha', 'Visualiza fila de pedidos e atualiza status de preparo'),
+('caixa', 'Visualiza comandas abertas e realiza fechamento/pagamento');
 
+-- Funcionários (senha de teste em hash bcrypt fictício para exemplo: "123456")
+INSERT INTO funcionarios (nome, email, senha_hash, perfil_id, ativo) VALUES
+('Dona Célia', 'celia@sabordavila.com', '$2b$10$ExemploHashGerente12345678901234567890123456789012345', 1, TRUE),
+('Carlos Silva', 'carlos@sabordavila.com', '$2b$10$ExemploHashGarcom112345678901234567890123456789012345', 2, TRUE),
+('Mariana Souza', 'mariana@sabordavila.com', '$2b$10$ExemploHashGarcom212345678901234567890123456789012345', 2, TRUE),
+('João Pedro', 'joao@sabordavila.com', '$2b$10$ExemploHashCozinha12345678901234567890123456789012345', 3, TRUE),
+('Fernanda Lima', 'fernanda@sabordavila.com', '$2b$10$ExemploHashCaixa123456789012345678901234567890123456', 4, TRUE);
 
--- ---------------------------------------------------------------------
--- FUNCIONÁRIOS: 1 gerente, 4 garçons, 1 caixa, 3 cozinha (+1 garçom inativo)
--- ---------------------------------------------------------------------
-INSERT INTO funcionario (funcionario_id, perfil, nome, email, senha_hash, ativo) VALUES
-('gerente',  'Célia Andrade',    'celia@sabordavila.com',    '$2b$10$6Epso9SQJ85K80kR2gzipuLv2xKpQ7yWuDdlno.q5hu2DyC9g2hKK', TRUE),
-('garcom', 'Bruno Martins',    'bruno@sabordavila.com',    '$2b$10$6Epso9SQJ85K80kR2gzipuLv2xKpQ7yWuDdlno.q5hu2DyC9g2hKK', TRUE),
-('garcom', 'Carla Souza',      'carla@sabordavila.com',    '$2b$10$6Epso9SQJ85K80kR2gzipuLv2xKpQ7yWuDdlno.q5hu2DyC9g2hKK', TRUE),
-('garcom', 'Diego Lima',       'diego@sabordavila.com',    '$2b$10$6Epso9SQJ85K80kR2gzipuLv2xKpQ7yWuDdlno.q5hu2DyC9g2hKK', TRUE),
-('garcom', 'Elisa Rocha',      'elisa@sabordavila.com',    '$2b$10$6Epso9SQJ85K80kR2gzipuLv2xKpQ7yWuDdlno.q5hu2DyC9g2hKK', TRUE),
-('caixa', 'Fátima Gomes',     'fatima@sabordavila.com',   '$2b$10$6Epso9SQJ85K80kR2gzipuLv2xKpQ7yWuDdlno.q5hu2DyC9g2hKK', TRUE),
-('cozinha', 'Gustavo Pires',    'gustavo@sabordavila.com',  '$2b$10$6Epso9SQJ85K80kR2gzipuLv2xKpQ7yWuDdlno.q5hu2DyC9g2hKK', TRUE),
-('cozinha', 'Helena Costa',     'helena@sabordavila.com',   '$2b$10$6Epso9SQJ85K80kR2gzipuLv2xKpQ7yWuDdlno.q5hu2DyC9g2hKK', TRUE),
-('cozinha', 'Igor Ferreira',    'igor@sabordavila.com',     '$2b$10$6Epso9SQJ85K80kR2gzipuLv2xKpQ7yWuDdlno.q5hu2DyC9g2hKK', TRUE),
-('garcom', 'Joana Barbosa',    'joana@sabordavila.com',    '$2b$10$6Epso9SQJ85K80kR2gzipuLv2xKpQ7yWuDdlno.q5hu2DyC9g2hKK', FALSE);
+-- Mesas (ID representa o número da mesa)
+INSERT INTO mesas (lugares) VALUES
+(4), (4), (2), (6), (4), (8);
 
--- ---------------------------------------------------------------------
--- MESAS: 15 mesas
--- ---------------------------------------------------------------------
-INSERT INTO mesa (lugares) VALUES
-(2),  (2),  (4),  (4),  (4),
-(4),  (6),  (6),  (2),  (4),
-(4), (6), (8), (8), (10);
+-- Categorias
+INSERT INTO categorias (nome) VALUES
+('Entradas'),
+('Pratos Principais'),
+('Bebidas'),
+('Sobremesas'),
+('Porções');
 
--- ---------------------------------------------------------------------
--- CATEGORIAS
--- ---------------------------------------------------------------------
-INSERT INTO categoria (categoria_id, nome) VALUES
-(1, 'Entradas'),
-(2, 'Pratos principais'),
-(3, 'Bebidas'),
-(4, 'Sobremesas');
+-- Produtos
+INSERT INTO produtos (nome, descricao, categoria_id, preco_atual, disponivel) VALUES
+('Bolinho de Bacalhau', 'Porção com 6 unidades crocantes', 1, 32.00, TRUE),
+('Parmegiana de Filé', 'Acompanha arroz e fritas', 2, 58.90, TRUE),
+('Feijoada Completa', 'Serve 2 pessoas', 2, 89.90, TRUE),
+('Suco de Laranja 500ml', 'Natural da fruta', 3, 12.00, TRUE),
+('Refrigerante Lata', '350ml', 3, 7.50, TRUE),
+('Pudim de Leite', 'Fatia generosa com calda de caramelo', 4, 15.00, TRUE),
+('Batata Frita Especial', 'Com cheddar e bacon', 5, 35.00, FALSE);
 
--- ---------------------------------------------------------------------
--- PRODUTOS (amostra do cardápio de ~40 itens). O id 9 está indisponível.
--- ---------------------------------------------------------------------
-INSERT INTO produto (produto_id, nome, descricao, categoria_id, preco_atual, disponivel) VALUES
-(1,  'Bruschetta',               'Pão italiano, tomate, manjericão e azeite',   1, 22.00, TRUE),
-(2,  'Pastel de queijo',         'Porção com 6 unidades',                       1, 18.00, TRUE),
-(3,  'Caldo verde',              'Batata, couve e calabresa',                   1, 16.00, TRUE),
-(4,  'Salada caprese',           'Tomate, muçarela de búfala e manjericão',     1, 24.00, TRUE),
-(5,  'Filé à parmegiana',        'Filé empanado com queijo e molho, arroz e fritas', 2, 58.00, TRUE),
-(6,  'Frango grelhado',          'Peito de frango, arroz, feijão e salada',     2, 42.00, TRUE),
-(7,  'Feijoada individual',      'Feijoada completa com acompanhamentos',       2, 46.00, TRUE),
-(8,  'Risoto de cogumelos',      'Arroz arbóreo com mix de cogumelos',          2, 54.00, TRUE),
-(9,  'Spaghetti à bolonhesa',    'Massa com molho de carne',                    2, 38.00, FALSE),
-(10, 'Refrigerante lata',        '350 ml',                                      3,  7.00, TRUE),
-(11, 'Suco natural',             'Laranja, limão ou maracujá',                  3, 12.00, TRUE),
-(12, 'Água mineral',             '500 ml',                                      3,  5.00, TRUE),
-(13, 'Cerveja long neck',        '355 ml',                                      3, 14.00, TRUE),
-(14, 'Pudim de leite',           'Fatia com calda de caramelo',                 4, 14.00, TRUE),
-(15, 'Petit gâteau',             'Com sorvete de creme',                        4, 22.00, TRUE),
-(16, 'Mousse de maracujá',       NULL,                                          4, 12.00, TRUE);
+-- Comandas (abertas e fechadas no mês atual)
+INSERT INTO comandas (mesa_id, garcom_id, data_abertura, data_fechamento, status, forma_pagamento, taxa_servico) VALUES
+(1, 2, NOW() - INTERVAL 2 DAY, NOW() - INTERVAL 2 DAY + INTERVAL 1 HOUR, 'fechada', 'cartao', TRUE),
+(2, 3, NOW() - INTERVAL 2 DAY, NOW() - INTERVAL 2 DAY + INTERVAL 2 HOUR, 'fechada', 'pix', TRUE),
+(3, 2, NOW() - INTERVAL 1 DAY, NOW() - INTERVAL 1 DAY + INTERVAL 1 HOUR, 'fechada', 'dinheiro', FALSE),
+(4, 3, NOW() - INTERVAL 1 HOUR, NULL, 'aberta', NULL, FALSE),
+(5, 2, NOW() - INTERVAL 30 MINUTE, NULL, 'aberta', NULL, FALSE);
 
-
+-- Itens da Comanda
+INSERT INTO itens_comanda (comanda_id, produto_id, quantidade, preco_unitario, observacao, hora_pedido, status) VALUES
+(1, 1, 1, 32.00, NULL, NOW() - INTERVAL 2 DAY, 'entregue'),
+(1, 2, 2, 58.90, 'Sem cebola', NOW() - INTERVAL 2 DAY, 'entregue'),
+(1, 4, 2, 12.00, 'Com gelo e limão', NOW() - INTERVAL 2 DAY, 'entregue'),
+(2, 3, 1, 89.90, NULL, NOW() - INTERVAL 2 DAY, 'entregue'),
+(2, 6, 2, 15.00, NULL, NOW() - INTERVAL 2 DAY, 'entregue'),
+(3, 2, 1, 58.90, NULL, NOW() - INTERVAL 1 DAY, 'entregue'),
+(3, 5, 1, 7.50, NULL, NOW() - INTERVAL 1 DAY, 'cancelado'),
+(4, 1, 1, 32.00, 'Bem passado', NOW() - INTERVAL 40 MINUTE, 'em preparo'),
+(4, 4, 2, 12.00, 'Sem açúcar', NOW() - INTERVAL 35 MINUTE, 'pronto'),
+(5, 2, 1, 58.90, 'Molho à parte', NOW() - INTERVAL 15 MINUTE, 'pendente');

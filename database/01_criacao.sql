@@ -17,13 +17,12 @@ CREATE TABLE categoria (
 CREATE TABLE mesa (
     mesa_id INT UNSIGNED NOT NULL AUTO_INCREMENT,                
     lugares INT UNSIGNED  NOT NULL,
-    PRIMARY KEY (mesa_id),
-    UNIQUE (numero)
+    PRIMARY KEY (mesa_id)
 );
 
 CREATE TABLE funcionario (
     funcionario_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    perfil ENUM('garcom', 'cozinha', 'caixa', 'gerente') UNSIGNED NOT NULL,
+    perfil ENUM('garcom', 'cozinha', 'caixa', 'gerente') NOT NULL,
     nome VARCHAR(180) NOT NULL,
     email VARCHAR(200) NOT NULL,
     senha_hash VARCHAR(255) NOT NULL,
@@ -56,7 +55,6 @@ CREATE TABLE comanda (
     forma_pagamento ENUM('dinheiro','cartao','pix'),
     taxa_servico BOOLEAN NOT NULL DEFAULT FALSE,
     PRIMARY KEY (comanda_id),
-    UNIQUE (mesa_aberta),
     FOREIGN KEY (mesa_id)   REFERENCES mesa (mesa_id),
     FOREIGN KEY (funcionario_id) REFERENCES funcionario (funcionario_id)
 );
